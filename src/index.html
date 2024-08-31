@@ -9,5 +9,24 @@
 </head>
 <body>
   <app-root></app-root>
+  <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyAN05zbvWrV3FvXk3lSI6Lz4hIOG0TyTQA",
+    authDomain: "movie-review-app-d4dd2.firebaseapp.com",
+    projectId: "movie-review-app-d4dd2",
+    storageBucket: "movie-review-app-d4dd2.appspot.com",
+    messagingSenderId: "926122465369",
+    appId: "1:926122465369:web:608c1378b658af1cabb948"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>
 </body>
 </html>

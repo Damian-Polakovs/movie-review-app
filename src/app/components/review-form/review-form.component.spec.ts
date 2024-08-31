@@ -23,7 +23,7 @@ export class ReviewFormComponent {
 
   submitReview(): void {
     const reviewData = { ...this.review, movieId: this.movieId };
-    this.http.post('http://YOUR_EC2_INSTANCE_IP:3000/reviews', reviewData).subscribe({
+    this.http.post('http://3.250.45.155:3000/reviews', reviewData).subscribe({
       next: (response) => {
         console.log('Review submitted', response);
         // Refresh the page
