@@ -1,23 +1,37 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
-import { ReviewFormComponent } from './review-form.component';
+@Component({
+  selector: 'app-review-form',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  templateUrl: './review-form.component.html',
+  styleUrls: ['./review-form.component.css']
+})
+export class ReviewFormComponent {
+  @Input() movieId!: number;
 
-describe('ReviewFormComponent', () => {
-  let component: ReviewFormComponent;
-  let fixture: ComponentFixture<ReviewFormComponent>;
+  review = {
+    reviewer: '',
+    comment: '',
+    rating: 0
+  };
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [ReviewFormComponent]
-    })
-    .compileComponents();
+  constructor(private http: HttpClient) {}
 
-    fixture = TestBed.createComponent(ReviewFormComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  submitReview(): void {
+    const reviewData = { ...this.review, movieId: this.movieId };
+    this.http.post('http://YOUR_EC2_INSTANCE_IP:3000/reviews', reviewData).subscribe({
+      next: (response) => {
+        console.log('Review submitted', response);
+        // Refresh the page
+        window.location.reload();
+      },
+      error: (err) => {
+        console.error('Error submitting review', err);
+      }
+    });
+  }
+}
